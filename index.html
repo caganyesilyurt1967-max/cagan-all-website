@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Çağan'ın Dijital Portalı: Yemek ve XOX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         /* === CSS Stilleri === */
         :root {
@@ -14,6 +15,7 @@
             --glow-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-pink);
             --box-bg: rgba(255, 255, 255, 0.05);
             --border-glow: rgba(0, 255, 255, 0.5);
+            --about-btn-color: #ffcc00; /* Neon Sarı */
         }
 
         body {
@@ -61,6 +63,35 @@
             margin-bottom: 40px;
             flex-wrap: nowrap; /* Yan yana kalmasını sağlar */
             justify-content: center;
+            /* Ana içerik gizlendiğinde kaybolmasın diye */
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Hakkımda Butonu (Yeni) */
+        #about-button {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            /* Neon Sarı Tema */
+            border: 2px solid var(--about-btn-color);
+            background: rgba(255, 204, 0, 0.1);
+            color: var(--about-btn-color);
+            box-shadow: 0 0 8px var(--about-btn-color);
+            z-index: 10; /* Diğer her şeyin üstünde */
+        }
+
+        #about-button:hover {
+            background: var(--about-btn-color);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--about-btn-color), 0 0 30px var(--about-btn-color);
+            transform: scale(1.05);
         }
 
         /* LED Panel / Kutu Stili */
@@ -116,7 +147,7 @@
             text-shadow: 0 0 5px var(--neon-pink);
         }
 
-        /* Buton Stili (Glow) */
+        /* Buton Stili (Glow) - Diğer butonlar */
         .neon-button {
             display: block;
             width: 80%;
@@ -152,6 +183,108 @@
             background: var(--neon-pink);
             box-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
         }
+        
+        /* === Hakkımda Modal Stili (Yeni Sayfa Görünümü) === */
+        #about-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.95); /* Koyu Arka Planı Hafifçe karartır */
+            z-index: 100;
+            display: none; /* Varsayılan olarak gizli */
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        #about-content {
+            background: var(--box-bg);
+            border: 3px solid var(--neon-pink);
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-blue);
+            text-align: center;
+            position: relative;
+        }
+
+        #about-content h2 {
+            font-size: 2.5em;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Hakkımda Yazı Stili (Parlak) */
+        #about-text {
+            font-size: 1.4em;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: #fff;
+            text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+        }
+        
+        /* Geri Dön Butonu (Yeni) */
+        #back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            border: 2px solid var(--neon-blue);
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--neon-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-blue);
+            z-index: 110;
+        }
+
+        #back-button:hover {
+            background: var(--neon-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--neon-blue);
+            transform: scale(1.05);
+        }
+
+        /* İletişim Stili (Yeni) */
+        .contact-section {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .contact-section p {
+            font-size: 1.2em;
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        .instagram-link {
+            display: inline-block;
+            color: var(--neon-pink);
+            font-size: 40px;
+            transition: transform 0.3s ease, color 0.3s ease;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .instagram-link:hover {
+            color: #E1306C; /* Instagram'ın kendi pembesi */
+            transform: scale(1.2);
+            text-shadow: 0 0 15px #E1306C;
+        }
+
 
         /* Mobil Uyumluluk: 1000px'ten küçük ekranlarda alt alta geçer */
         @media (max-width: 1000px) {
@@ -167,10 +300,31 @@
             h1 {
                 font-size: 2.5em;
                 letter-spacing: 3px;
+                margin-top: 70px; /* Butonun altına sarkmasın */
             }
 
             .neon-button {
                 width: 100%;
+            }
+            
+            #about-button {
+                top: 15px;
+                right: 15px;
+                padding: 8px 15px;
+            }
+
+            #about-content {
+                padding: 30px 20px;
+            }
+            
+            #about-text {
+                font-size: 1.2em;
+            }
+
+            #back-button {
+                top: 10px;
+                left: 10px;
+                padding: 8px 10px;
             }
         }
     </style>
@@ -179,55 +333,82 @@
 
     <div id="dots-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></div>
 
-    <h1>⚡ Çağan'ın Dijital Portalı ⚡</h1>
+    <button id="about-button">Hakkımda</button>
 
-    <div class="container">
-        
-        <div class="project-panel" id="yemek-panel">
-            <h2>🍽️ Lezzet Durağı: Yemek Tarifleri Sitesi</h2>
+    <div id="main-content">
+        <h1>⚡ Çağan'ın Dijital Portalı ⚡</h1>
+
+        <div class="container">
             
-            <ul class="features">
-                <li>Kayıt Ol - Giriş Yap: Tam kullanıcı oturum yönetimi.</li>
-                <li>Kapsamlı Tarifler: Kolayca aranabilir, geniş tarif arşivi.</li>
-                <li>Etkileşimli Topluluk: Yorum Yapma ve Beğenme özellikleri.</li>
-                <li>Kişisel Koleksiyon: Favorilerim bölümü ile tarifleri kaydetme.</li>
-                <li>Yönetici Girişi: İçerik kontrolü ve site yönetimi yetkisi.</li>
-                <li>Kullanıcı Dostu Tasarım: Gelişmiş filtreleme ve modern arayüz.</li>
-            </ul>
+            <div class="project-panel" id="yemek-panel">
+                <h2>🍽️ Lezzet Durağı: Yemek Tarifleri Sitesi</h2>
+                
+                <ul class="features">
+                    <li>Kayıt Ol - Giriş Yap: Tam kullanıcı oturum yönetimi.</li>
+                    <li>Kapsamlı Tarifler: Kolayca aranabilir, geniş tarif arşivi.</li>
+                    <li>Etkileşimli Topluluk: Yorum Yapma ve Beğenme özellikleri.</li>
+                    <li>Kişisel Koleksiyon: Favorilerim bölümü ile tarifleri kaydetme.</li>
+                    <li>Yönetici Girişi: İçerik kontrolü ve site yönetimi yetkisi.</li>
+                    <li>Kullanıcı Dostu Tasarım: Gelişmiş filtreleme ve modern arayüz.</li>
+                </ul>
 
-            <p style="text-align: center; font-style: italic; color: #aaa;">
-                Gelişmiş, yüksek özelliklere sahip, tarifleri keşfetmeyi ve paylaşmayı kolaylaştıran dijital bir mutfak.
-            </p>
+                <p style="text-align: center; font-style: italic; color: #aaa;">
+                    Gelişmiş, yüksek özelliklere sahip, tarifleri keşfetmeyi ve paylaşmayı kolaylaştıran dijital bir mutfak.
+                </p>
 
-            <a href="https://caganyesilyurt1967-max.github.io/Cagan-Yemek-Tarifleri-/index.html" target="_blank" class="neon-button">
-                Siteye Git
-            </a>
+                <a href="https://caganyesilyurt1967-max.github.io/Cagan-Yemek-Tarifleri-/index.html" target="_blank" class="neon-button">
+                    Siteye Git
+                </a>
+            </div>
+
+            <div class="project-panel" id="xox-panel">
+                <h2>✖️⭕ Çağan X O X: Zeka Yarışı</h2>
+                
+                <ul class="features">
+                    <li>Zorluk Seçimi: Kolay, Orta, Zor seviyelerde yapay zekaya karşı mücadele.</li>
+                    <li>Bilgisayara Karşı: Gelişmiş algoritma ile tek kişilik oyun keyfi.</li>
+                    <li>Kullanıcı Adı Seçme: Oyuna kişiselleştirilmiş bir başlangıç.</li>
+                    <li>LED'li Arka Plan: Dinamik ve renkli arayüz ile görsel şölen.</li>
+                    <li>Stratejik Derinlik: Her hamlenin önemli olduğu klasik oyun.</li>
+                    <li>Hızlı ve Akıcı: Tüm cihazlarda sorunsuz çalışan modern kodlama.</li>
+                </ul>
+
+                <p style="text-align: center; font-style: italic; color: #aaa;">
+                    Eğlenceli ve güzel vakit geçirebileceğiniz, stratejik düşünme becerilerinizi zorlayacak bir XOX (Tic-Tac-Toe) deneyimi.
+                </p>
+
+                <a href="https://caganyesilyurt1967-max.github.io/xox-oyunu-projesi/" target="_blank" class="neon-button xox-button">
+                    Oyuna Başla
+                </a>
+            </div>
+
         </div>
-
-        <div class="project-panel" id="xox-panel">
-            <h2>✖️⭕ Çağan X O X: Zeka Yarışı</h2>
+    </div>
+    
+    <div id="about-modal">
+        <div id="about-content">
             
-            <ul class="features">
-                <li>Zorluk Seçimi: Kolay, Orta, Zor seviyelerde yapay zekaya karşı mücadele.</li>
-                <li>Bilgisayara Karşı: Gelişmiş algoritma ile tek kişilik oyun keyfi.</li>
-                <li>Kullanıcı Adı Seçme: Oyuna kişiselleştirilmiş bir başlangıç.</li>
-                <li>LED'li Arka Plan: Dinamik ve renkli arayüz ile görsel şölen.</li>
-                <li>Stratejik Derinlik: Her hamlenin önemli olduğu klasik oyun.</li>
-                <li>Hızlı ve Akıcı: Tüm cihazlarda sorunsuz çalışan modern kodlama.</li>
-            </ul>
+            <button id="back-button"><i class="fas fa-arrow-left"></i> Geri Dön</button>
+            
+            <h2>Hakkımda</h2>
 
-            <p style="text-align: center; font-style: italic; color: #aaa;">
-                Eğlenceli ve güzel vakit geçirebileceğiniz, stratejik düşünme becerilerinizi zorlayacak bir XOX (Tic-Tac-Toe) deneyimi.
+            <p id="about-text">
+                👋 Merhabalar ben **Çağan Yeşilyurt**! <br> 
+                Bu dijital portalda gördüğünüz tüm projelerin, web sitelerinin ve oyunların sahibi ve geliştiricisi benim. Yazılım ve kodlama tutkumun birer ürünü olan bu çalışmaları sizlerle paylaşmaktan mutluluk duyuyorum. <br> 
+                Geliştirdiğim Yemek Tarifleri sitesinden, yapay zekalı XOX oyununa kadar, her bir proje benim için büyük bir öğrenme ve yaratıcılık serüveni oldu. Yeni fikirler üretmeye ve kendimi geliştirmeye devam ediyorum!
             </p>
-
-            <a href="https://caganyesilyurt1967-max.github.io/xox-oyunu-projesi/" target="_blank" class="neon-button xox-button">
-                Oyuna Başla
-            </a>
+            
+            <div class="contact-section">
+                <p>İletişim ve Daha Fazlası:</p>
+                <a href="https://www.instagram.com/cagan196761?igsh=MTF0OXNvYmhybHpyNA==" target="_blank" class="instagram-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
         </div>
-
     </div>
 
     <script>
+        // === ARKA PLAN DOTS SCRIPT ===
         const dotsContainer = document.getElementById('dots-container');
         const numDots = 50; // Arka planda gösterilecek nokta sayısı
 
@@ -241,7 +422,7 @@
             dot.style.backgroundColor = 'var(--neon-pink)';
             dot.style.boxShadow = '0 0 5px var(--neon-blue)';
             
-            // Rastgele pozisyon ve boyut
+            // Rastgele pozisyon
             dot.style.left = `${Math.random() * 100}vw`;
             dot.style.top = `${Math.random() * 100}vh`;
             const size = Math.random() * 3 + 1;
@@ -250,25 +431,58 @@
 
             // Animasyon süresi
             const duration = Math.random() * 15 + 10; 
-            dot.style.animation = `floatDot ${duration}s infinite alternate ease-in-out`;
+            
+            // Her dot için farklı hareket yönleri oluşturulur
+            const randomX = Math.random() * 100 - 50;
+            const randomY = Math.random() * 100 - 50;
+            const keyframesName = `floatDot-${i}`;
 
+            // Dinamik keyframe ekleme
+            const styleSheet = document.getElementById('dot-keyframes') || (function() {
+                const style = document.createElement("style");
+                style.type = "text/css";
+                style.id = 'dot-keyframes';
+                document.head.appendChild(style);
+                return style;
+            })();
+            
+            styleSheet.innerText += `
+                @keyframes ${keyframesName} {
+                    0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+                    50% { transform: translate(${randomX}px, ${randomY}px) scale(1.5); opacity: 0.8; }
+                    100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+                }
+            `;
+
+            dot.style.animation = `${keyframesName} ${duration}s infinite alternate ease-in-out`;
+            
             // Rastgele renk ve şeffaflık
             dot.style.opacity = Math.random() * 0.5 + 0.2;
             
             dotsContainer.appendChild(dot);
         }
 
-        // Nokta hareket animasyonu için CSS anahtarları (Keyframes)
-        const styleSheet = document.createElement("style");
-        styleSheet.type = "text/css";
-        styleSheet.innerText = `
-            @keyframes floatDot {
-                0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-                50% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(1.5); opacity: 0.8; }
-                100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-            }
-        `;
-        document.head.appendChild(styleSheet);
+        // === MODAL SCRIPT ===
+        const aboutButton = document.getElementById('about-button');
+        const backButton = document.getElementById('back-button');
+        const aboutModal = document.getElementById('about-modal');
+        const mainContent = document.getElementById('main-content');
+
+        // Hakkımda Butonuna basıldığında
+        aboutButton.addEventListener('click', () => {
+            aboutModal.style.display = 'flex'; // Modalı göster
+            mainContent.style.opacity = '0.1'; // Ana içeriği hafifçe karart
+            aboutButton.style.display = 'none'; // Kendi butonunu gizle
+            document.body.style.overflow = 'hidden'; // Scroll'u engelle
+        });
+
+        // Geri Dön Butonuna basıldığında
+        backButton.addEventListener('click', () => {
+            aboutModal.style.display = 'none'; // Modalı gizle
+            mainContent.style.opacity = '1'; // Ana içeriği geri getir
+            aboutButton.style.display = 'block'; // Hakkımda butonunu tekrar göster
+            document.body.style.overflow = 'auto'; // Scroll'u aktif et
+        });
     </script>
 </body>
 </html>
