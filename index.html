@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çağan'ın Dijital Portalı: Yemek ve XOX</title>
+    <style>
+        /* === CSS Stilleri === */
+        :root {
+            /* Renk Paleti: Neon ve Koyu */
+            --bg-dark: #121212;
+            --neon-blue: #00ffff;
+            --neon-pink: #ff00ff;
+            --glow-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-pink);
+            --box-bg: rgba(255, 255, 255, 0.05);
+            --border-glow: rgba(0, 255, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            /* Yaratıcı Arka Plan: Grid ve Animasyonlu Noktalar */
+            background-image: 
+                linear-gradient(90deg, #3333331a 1px, transparent 1px),
+                linear-gradient(180deg, #3333331a 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: background-move 60s linear infinite;
+        }
+
+        @keyframes background-move {
+            from { background-position: 0 0; }
+            to { background-position: 500px 500px; }
+        }
+
+        /* Başlık Stili */
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            margin: 40px 0 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            /* Neon Efekti */
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-pink);
+        }
+
+        /* Ana Kapsayıcı: Yan Yana Yapı için Ayar */
+        .container {
+            display: flex;
+            gap: 40px;
+            padding: 20px;
+            max-width: 1200px;
+            width: 90%;
+            margin-bottom: 40px;
+            flex-wrap: nowrap; /* Yan yana kalmasını sağlar */
+            justify-content: center;
+        }
+
+        /* LED Panel / Kutu Stili */
+        .project-panel {
+            background: var(--box-bg);
+            border: 2px solid var(--border-glow);
+            flex: 1; /* Eşit genişlikte olmasını sağlar */
+            min-width: 45%; /* Yan yana kalmasını garantiler */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--glow-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-panel:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 25px var(--neon-blue), 0 0 40px var(--neon-pink);
+        }
+
+        /* Panel Başlıkları */
+        .project-panel h2 {
+            font-size: 1.8em;
+            text-align: center;
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px var(--neon-blue);
+            border-bottom: 2px solid var(--neon-pink);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Özellik Listesi */
+        .features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .features li::before {
+            content: '>';
+            color: var(--neon-pink);
+            font-weight: bold;
+            margin-right: 10px;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        /* Buton Stili (Glow) */
+        .neon-button {
+            display: block;
+            width: 80%;
+            margin: 30px auto 0;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid var(--neon-blue);
+            background: rgba(0, 255, 255, 0.1);
+            color: #fff;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .neon-button:hover {
+            background: var(--neon-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+            transform: scale(1.05);
+        }
+
+        .xox-button {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+            background: rgba(255, 0, 255, 0.1);
+        }
+
+        .xox-button:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
+        }
+
+        /* Mobil Uyumluluk: 1000px'ten küçük ekranlarda alt alta geçer */
+        @media (max-width: 1000px) {
+            .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .project-panel {
+                min-width: 90%;
+            }
+
+            h1 {
+                font-size: 2.5em;
+                letter-spacing: 3px;
+            }
+
+            .neon-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="dots-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></div>
+
+    <h1>⚡ Çağan'ın Dijital Portalı ⚡</h1>
+
+    <div class="container">
+        
+        <div class="project-panel" id="yemek-panel">
+            <h2>🍽️ Lezzet Durağı: Yemek Tarifleri Sitesi</h2>
+            
+            <ul class="features">
+                <li>Kayıt Ol - Giriş Yap: Tam kullanıcı oturum yönetimi.</li>
+                <li>Kapsamlı Tarifler: Kolayca aranabilir, geniş tarif arşivi.</li>
+                <li>Etkileşimli Topluluk: Yorum Yapma ve Beğenme özellikleri.</li>
+                <li>Kişisel Koleksiyon: Favorilerim bölümü ile tarifleri kaydetme.</li>
+                <li>Yönetici Girişi: İçerik kontrolü ve site yönetimi yetkisi.</li>
+                <li>Kullanıcı Dostu Tasarım: Gelişmiş filtreleme ve modern arayüz.</li>
+            </ul>
+
+            <p style="text-align: center; font-style: italic; color: #aaa;">
+                Gelişmiş, yüksek özelliklere sahip, tarifleri keşfetmeyi ve paylaşmayı kolaylaştıran dijital bir mutfak.
+            </p>
+
+            <a href="https://caganyesilyurt1967-max.github.io/Cagan-Yemek-Tarifleri-/index.html" target="_blank" class="neon-button">
+                Siteye Git
+            </a>
+        </div>
+
+        <div class="project-panel" id="xox-panel">
+            <h2>✖️⭕ Çağan X O X: Zeka Yarışı</h2>
+            
+            <ul class="features">
+                <li>Zorluk Seçimi: Kolay, Orta, Zor seviyelerde yapay zekaya karşı mücadele.</li>
+                <li>Bilgisayara Karşı: Gelişmiş algoritma ile tek kişilik oyun keyfi.</li>
+                <li>Kullanıcı Adı Seçme: Oyuna kişiselleştirilmiş bir başlangıç.</li>
+                <li>LED'li Arka Plan: Dinamik ve renkli arayüz ile görsel şölen.</li>
+                <li>Stratejik Derinlik: Her hamlenin önemli olduğu klasik oyun.</li>
+                <li>Hızlı ve Akıcı: Tüm cihazlarda sorunsuz çalışan modern kodlama.</li>
+            </ul>
+
+            <p style="text-align: center; font-style: italic; color: #aaa;">
+                Eğlenceli ve güzel vakit geçirebileceğiniz, stratejik düşünme becerilerinizi zorlayacak bir XOX (Tic-Tac-Toe) deneyimi.
+            </p>
+
+            <a href="https://caganyesilyurt1967-max.github.io/xox-oyunu-projesi/" target="_blank" class="neon-button xox-button">
+                Oyuna Başla
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        const dotsContainer = document.getElementById('dots-container');
+        const numDots = 50; // Arka planda gösterilecek nokta sayısı
+
+        // Rastgele animasyonlu noktalar oluşturma
+        for (let i = 0; i < numDots; i++) {
+            const dot = document.createElement('div');
+            dot.style.position = 'absolute';
+            dot.style.width = '3px';
+            dot.style.height = '3px';
+            dot.style.borderRadius = '50%';
+            dot.style.backgroundColor = 'var(--neon-pink)';
+            dot.style.boxShadow = '0 0 5px var(--neon-blue)';
+            
+            // Rastgele pozisyon ve boyut
+            dot.style.left = `${Math.random() * 100}vw`;
+            dot.style.top = `${Math.random() * 100}vh`;
+            const size = Math.random() * 3 + 1;
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+
+            // Animasyon süresi
+            const duration = Math.random() * 15 + 10; 
+            dot.style.animation = `floatDot ${duration}s infinite alternate ease-in-out`;
+
+            // Rastgele renk ve şeffaflık
+            dot.style.opacity = Math.random() * 0.5 + 0.2;
+            
+            dotsContainer.appendChild(dot);
+        }
+
+        // Nokta hareket animasyonu için CSS anahtarları (Keyframes)
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = `
+            @keyframes floatDot {
+                0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+                50% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(1.5); opacity: 0.8; }
+                100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
